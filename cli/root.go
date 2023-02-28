@@ -2,11 +2,9 @@ package cli
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 
 	"github.com/haytty/karas/cli/cli"
-	"github.com/haytty/karas/cli/commands"
 	"github.com/haytty/karas/cli/flags"
 	"github.com/haytty/karas/cli/logger"
 	"github.com/haytty/karas/cli/version"
@@ -15,6 +13,7 @@ import (
 )
 
 func NewKarasCommand(cli cli.Cli) *cobra.Command {
+	opts := flags.NewGlobalOption()
 	rootCmd := &cobra.Command{ //nolint:exhaustivestruct
 		Use:   "karas",
 		Short: "This is short message.",
@@ -26,39 +25,27 @@ func NewKarasCommand(cli cli.Cli) *cobra.Command {
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return karas.Apply()
+			return karas.Apply(opts.Json)
 		},
 		PersistentPreRunE: initialize(cli),
 	}
-	rootCmd.AddCommand(
-		commands.AddCommand(cli),
-	)
 
-	opts := flags.NewGlobalOption()
-	flagName := "base-dir"
-	defaultDir := filepath.Join(os.Getenv("HOME"), ".config", "karas")
-	rootCmd.PersistentFlags().StringVarP(
-		&opts.BaseDir,
-		flagName,
-		"d",
-		defaultDir,
-		"base directory",
-	)
+	configFlagName := "config"
+	defaultKarasfile := filepath.Join("./", "Karasfile")
+	rootCmd.PersistentFlags().StringVarP(&opts.Config, configFlagName, "c", defaultKarasfile, "config file path")
 
-	if err := rootCmd.RegisterFlagCompletionFunc(
-		flagName,
-		func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
-			return []string{defaultDir}, cobra.ShellCompDirectiveFilterFileExt
-		}); err != nil {
-		os.Exit(1)
-	}
+	jsonFlagName := "json"
+	rootCmd.PersistentFlags().StringVarP(&opts.Json, jsonFlagName, "j", "", "json file path")
 
 	return rootCmd
 }
 
 func initialize(c cli.Cli) func(cmd *cobra.Command, args []string) error {
 	return func(cmd *cobra.Command, args []string) error {
-		// opts := flags.NewGlobalOption()
+		opts := flags.NewGlobalOption()
+		if !opts.Valid() {
+			return fmt.Errorf("%s is not found.", opts.Config)
+		}
 
 		if err := logger.SetupLogger(c); err != nil {
 			return fmt.Errorf("setup logger: %w", err)

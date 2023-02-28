@@ -1,18 +1,25 @@
 package karas
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 
-	"github.com/fatih/color"
 	"github.com/haytty/karas/internal/model"
 )
 
-func Apply() error {
-	karas := model.NewKaras()
+func Apply(jsonFile string) error {
+	b, err := os.ReadFile(jsonFile)
+	if err != nil {
+		return err
+	}
 
-	fmt.Printf(
-		color.GreenString("Root Action:%s \n", karas.String()),
-	)
+	m := model.NewKarasJSON()
+	if err := json.Unmarshal(b, m); err != nil {
+		return err
+	}
+
+	fmt.Println(*m)
 
 	return nil
 }

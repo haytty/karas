@@ -1,0 +1,50 @@
+{
+    "karas":{
+        "url": "https://google.com",
+        "output": "json",
+        "actions": [
+            {
+                "name": "input id",
+                "input": {
+                    "selector": {
+                        "xpath": ""
+                    },
+                    "value": "fugafuga"
+                }
+            },
+            {
+                "name": "input pw",
+                "input": {
+                    "selector": {
+                        "xpath": ""
+                    },
+                    "value": "hogehoge"
+                }
+            },
+            {
+                "name": "click login",
+                "click": {
+                    "selector": {
+                        "xpath": ""
+                    }
+                }
+            },
+            {
+                "name": "get value1",
+                "get": {
+                    "selector": {
+                        "xpath": ""
+                    }
+                }
+            },
+            {
+                "name": "get value2",
+                "get": {
+                    "selector": {
+                        "xpath": ""
+                    }
+                }
+            }
+        ]
+    }
+}
