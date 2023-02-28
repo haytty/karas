@@ -5,18 +5,18 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/haytty/golang_cli_template/cli/cli"
-	"github.com/haytty/golang_cli_template/cli/commands"
-	"github.com/haytty/golang_cli_template/cli/flags"
-	"github.com/haytty/golang_cli_template/cli/logger"
-	"github.com/haytty/golang_cli_template/cli/version"
-	"github.com/haytty/golang_cli_template/internal/handler/golang_cli_template"
+	"github.com/haytty/karas/cli/cli"
+	"github.com/haytty/karas/cli/commands"
+	"github.com/haytty/karas/cli/flags"
+	"github.com/haytty/karas/cli/logger"
+	"github.com/haytty/karas/cli/version"
+	"github.com/haytty/karas/internal/handler/karas"
 	"github.com/spf13/cobra"
 )
 
-func NewGolangCliTemplateCommand(cli cli.Cli) *cobra.Command {
+func NewKarasCommand(cli cli.Cli) *cobra.Command {
 	rootCmd := &cobra.Command{ //nolint:exhaustivestruct
-		Use:   "golang_cli_template",
+		Use:   "karas",
 		Short: "This is short message.",
 		Long: fmt.Sprintln(
 			"This is long message.\n" +
@@ -26,7 +26,7 @@ func NewGolangCliTemplateCommand(cli cli.Cli) *cobra.Command {
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return golang_cli_template.Apply()
+			return karas.Apply()
 		},
 		PersistentPreRunE: initialize(cli),
 	}
@@ -36,7 +36,7 @@ func NewGolangCliTemplateCommand(cli cli.Cli) *cobra.Command {
 
 	opts := flags.NewGlobalOption()
 	flagName := "base-dir"
-	defaultDir := filepath.Join(os.Getenv("HOME"), ".config", "golang_cli_template")
+	defaultDir := filepath.Join(os.Getenv("HOME"), ".config", "karas")
 	rootCmd.PersistentFlags().StringVarP(
 		&opts.BaseDir,
 		flagName,

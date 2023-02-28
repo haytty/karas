@@ -1,6 +1,6 @@
 .PHONY: build clean install uninstall
 
-APP_NAME := golang_cli_template
+APP_NAME := karas
 PREFIX := /usr/local/bin
 
 install:

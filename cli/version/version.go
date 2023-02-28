@@ -1,7 +1,7 @@
 package version
 
 var (
-	Name         = "golang_cli_template"
+	Name         = "karas"
 	BuildVersion = ""
 	Version      = "1.0.0"
 )

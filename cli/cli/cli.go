@@ -38,7 +38,7 @@ func (cli *DefaultCli) LogLevel() string {
 	return cli.loglevel
 }
 
-type GolangCliTemplateCli struct {
+type KarasCli struct {
 	DefaultCli
 
 	appMode string
@@ -46,7 +46,7 @@ type GolangCliTemplateCli struct {
 	// configDir string
 }
 
-func (cli *GolangCliTemplateCli) Apply(opts ...cliOption) error {
+func (cli *KarasCli) Apply(opts ...cliOption) error {
 	for _, opt := range opts {
 		err := opt(cli)
 		if err != nil {
@@ -57,8 +57,8 @@ func (cli *GolangCliTemplateCli) Apply(opts ...cliOption) error {
 	return nil
 }
 
-func NewGolangCliTemplateCli(opts ...cliOption) *GolangCliTemplateCli {
-	cli := &GolangCliTemplateCli{
+func NewKarasCli(opts ...cliOption) *KarasCli {
+	cli := &KarasCli{
 		DefaultCli: DefaultCli{
 			stdin:  os.Stdin,
 			stdout: os.Stdout,

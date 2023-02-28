@@ -5,19 +5,19 @@ import (
 	"os"
 	"strings"
 
-	"github.com/haytty/golang_cli_template/cli/version"
-	"github.com/haytty/golang_cli_template/internal/util"
+	"github.com/haytty/karas/cli/version"
+	"github.com/haytty/karas/internal/util"
 )
 
-type cliOption func(*GolangCliTemplateCli) error
+type cliOption func(*KarasCli) error
 
-func SetApplicationMode(cli *GolangCliTemplateCli) error {
+func SetApplicationMode(cli *KarasCli) error {
 	cli.appMode = os.Getenv("APP_ENV")
 
 	return nil
 }
 
-func SetLogLevel(cli *GolangCliTemplateCli) error {
+func SetLogLevel(cli *KarasCli) error {
 	validLogLevels := []string{
 		"panic",
 		"fatal",
@@ -38,7 +38,7 @@ func SetLogLevel(cli *GolangCliTemplateCli) error {
 	return nil
 }
 
-//func SetConfigDir(cli *GolangCliTemplateCli) error {
+//func SetConfigDir(cli *KarasCli) error {
 //	cli.configDir = os.Getenv(fmt.Sprintf("%s_CONFIG_DIR", strings.ToUpper(version.Name)))
 //	return nil
 //}

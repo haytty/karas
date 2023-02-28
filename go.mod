@@ -1,4 +1,4 @@
-module github.com/haytty/golang_cli_template
+module github.com/haytty/karas
 
 go 1.19
 

@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"github.com/haytty/golang_cli_template/cli/cli"
+	"github.com/haytty/karas/cli/cli"
 	"github.com/sirupsen/logrus"
 )
 
