@@ -1,0 +1,21 @@
+linters:
+  enable-all: true
+  disable:
+    - exhaustruct
+    - exhaustivestruct
+    - forbidigo
+    - varcheck
+    - ifshort
+    - interfacer
+    - nosnakecase
+    - golint
+    - deadcode
+    - structcheck
+    - scopelint
+    - maligned
+    - gochecknoglobals
+    - wrapcheck
+    - gocritic
+    - ireturn
+    - nonamedreturns
+    - varnamelen
