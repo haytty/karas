@@ -1,2 +1,4 @@
 /.idea
 /bin
+/drivers/*
+!/drivers/init.go

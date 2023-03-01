@@ -26,5 +26,7 @@ func Apply(jsonFile string) error {
 		action.Event.Act()
 	}
 
+	m.Do()
+
 	return nil
 }
