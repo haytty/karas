@@ -2,7 +2,6 @@ package action
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/haytty/karas/internal/model/action/event"
 )
@@ -47,8 +46,6 @@ func (a *Action) UnmarshalJSON(bytes []byte) error {
 
 	a.Name = preUnMarshalAction.Name
 	a.Method = preUnMarshalAction.Method
-
-	fmt.Println(a.Method)
 
 	return nil
 }

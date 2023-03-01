@@ -2,9 +2,10 @@ package model
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"time"
+
+	"github.com/tebeka/selenium/chrome"
 
 	"github.com/tebeka/selenium"
 
@@ -20,7 +21,6 @@ type KarasJSON struct {
 }
 
 func NewKarasJSON() *KarasJSON {
-	fmt.Println("KarasJSON")
 	return &KarasJSON{}
 }
 
@@ -29,26 +29,51 @@ func (s *KarasJSON) Do() error {
 	// running).
 	const (
 		// These paths will be different on your system.
-		seleniumPath    = "vendor/selenium-server-standalone-3.4.jar"
-		geckoDriverPath = "vendor/geckodriver-v0.18.0-linux64"
-		port            = 8080
+		seleniumPath     = "drivers/selenium-server.jar"
+		chromeDriverPath = "drivers/chromedriver"
+		geckoDriverPath  = "drivers/geckodriver"
+		firefoxPath      = "drivers/firefox/firefox"
+		port             = 8080
 	)
+
 	opts := []selenium.ServiceOption{
-		selenium.StartFrameBuffer(),           // Start an X frame buffer for the browser to run in.
-		selenium.GeckoDriver(geckoDriverPath), // Specify the path to GeckoDriver in order to use Firefox.
-		selenium.Output(os.Stderr),            // Output debug information to STDERR.
+		//selenium.StartFrameBuffer(),           // Start an X frame buffer for the browser to run in.
+		//selenium.GeckoDriver(geckoDriverPath), // Specify the path to GeckoDriver in order to use Firefox.
+		selenium.ChromeDriver(chromeDriverPath),
+		//selenium.Output(os.Stderr), // Output debug information to STDERR.
 	}
-	selenium.SetDebug(true)
+	//selenium.SetDebug(true)
 	service, err := selenium.NewSeleniumService(seleniumPath, port, opts...)
 	if err != nil {
+		fmt.Println("NewSeleniumService")
 		panic(err) // panic is used only as an example and is not otherwise recommended.
 	}
 	defer service.Stop()
 
 	// Connect to the WebDriver instance running locally.
-	caps := selenium.Capabilities{"browserName": "firefox"}
+	caps := selenium.Capabilities{"browserName": "chrome"}
+
+	chrCaps := chrome.Capabilities{
+		Path: "./drivers/chrome-linux/chrome",
+		Args: []string{
+			// This flag is needed to test against Chrome binaries that are not the
+			// default installation. The sandbox requires a setuid binary.
+			"--no-sandbox",
+		},
+		W3C: true,
+	}
+	chrCaps.Args = append(chrCaps.Args, "--headless")
+	caps.AddChrome(chrCaps)
+
+	//f := firefox.Capabilities{
+	//	Binary: firefoxPath,
+	//}
+	//caps.AddFirefox(f)
+
 	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
+	//wd, err := selenium.NewRemote(caps, "")
 	if err != nil {
+		fmt.Println("NewRemote")
 		panic(err)
 	}
 	defer wd.Quit()
@@ -77,6 +102,7 @@ func (s *KarasJSON) Do() error {
 			fmt.Println("Hello WebDriver!\n")
 		}
 	`)
+
 	if err != nil {
 		panic(err)
 	}
@@ -90,8 +116,11 @@ func (s *KarasJSON) Do() error {
 		panic(err)
 	}
 
+	// please check
+	time.Sleep(10 * time.Second)
+
 	// Wait for the program to finish running and get the output.
-	outputDiv, err := wd.FindElement(selenium.ByCSSSelector, "#output")
+	outputDiv, err := wd.FindElement(selenium.ByCSSSelector, "span.stdout")
 	if err != nil {
 		panic(err)
 	}
@@ -108,7 +137,7 @@ func (s *KarasJSON) Do() error {
 		time.Sleep(time.Millisecond * 100)
 	}
 
-	fmt.Printf("%s", strings.Replace(output, "\n\n", "\n", -1))
+	fmt.Printf("%s\n", strings.Replace(output, "\n\n", "\n", -1))
 
 	// Example Output:
 	// Hello WebDriver!
