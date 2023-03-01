@@ -21,5 +21,10 @@ func Apply(jsonFile string) error {
 
 	fmt.Println(*m)
 
+	fmt.Println("checkAction")
+	for _, action := range m.Karas.Actions {
+		action.Event.Act()
+	}
+
 	return nil
 }

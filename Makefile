@@ -19,3 +19,6 @@ test:
 
 lint:
 	golangci-lint run
+
+json_test:
+	go run ./cmd/karas/karas.go --json ./misc/data/karas.json

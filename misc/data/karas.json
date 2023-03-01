@@ -1,50 +1,60 @@
 {
-    "karas":{
-        "url": "https://google.com",
-        "output": "json",
-        "actions": [
-            {
-                "name": "input id",
-                "input": {
-                    "selector": {
-                        "xpath": ""
-                    },
-                    "value": "fugafuga"
-                }
-            },
-            {
-                "name": "input pw",
-                "input": {
-                    "selector": {
-                        "xpath": ""
-                    },
-                    "value": "hogehoge"
-                }
-            },
-            {
-                "name": "click login",
-                "click": {
-                    "selector": {
-                        "xpath": ""
-                    }
-                }
-            },
-            {
-                "name": "get value1",
-                "get": {
-                    "selector": {
-                        "xpath": ""
-                    }
-                }
-            },
-            {
-                "name": "get value2",
-                "get": {
-                    "selector": {
-                        "xpath": ""
-                    }
-                }
-            }
-        ]
-    }
+  "karas": {
+    "url": "https://google.com",
+    "output": "json",
+    "actions": [
+      {
+        "name": "input id",
+        "method": "input",
+        "event": {
+          "selector": {
+            "type": "xpath",
+            "value": "fuoo"
+          },
+          "value": "fugafuga"
+        }
+      },
+      {
+        "name": "input pw",
+        "method": "input",
+        "event": {
+          "selector": {
+            "type": "xpath",
+            "value": "fuoo"
+          },
+          "value": "hogehoge"
+        }
+      },
+      {
+        "name": "click login",
+        "method": "click",
+        "event": {
+          "selector": {
+            "type": "xpath",
+            "value": "fuoo"
+          }
+        }
+      },
+      {
+        "name": "get value1",
+        "method": "get",
+        "event": {
+          "selector": {
+            "type": "xpath",
+            "value": "fuoo"
+          }
+        }
+      },
+      {
+        "name": "get value2",
+        "method": "get",
+        "event": {
+          "selector": {
+            "type": "xpath",
+            "value": "fuoo"
+          }
+        }
+      }
+    ]
+  }
 }

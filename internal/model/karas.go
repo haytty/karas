@@ -1,12 +1,12 @@
 package model
 
-type Karas struct {
-}
+//type Karas struct {
+//}
 
-func NewKaras() *Karas {
-	return &Karas{}
-}
+//func NewKaras() *Karas {
+//	return &Karas{}
+//}
 
-func (s *Karas) String() string {
-	return "Karas"
-}
+//func (s *Karas) String() string {
+//	return "Karas"
+//}
