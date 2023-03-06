@@ -8,8 +8,8 @@
         "method": "input",
         "event": {
           "selector": {
-            "type": "xpath",
-            "value": "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input"
+            "type": "css",
+            "value": "input.gLFyf"
           },
           "value": "qiita"
         }
@@ -29,18 +29,18 @@
         "method": "click",
         "event": {
           "selector": {
-            "type": "xpath",
-            "value": "//*[@id=\"rso\"]/div[1]/div/div/div/div/div/div/div/div[1]/a"
+            "type": "css",
+            "value": "h3.LC20lb.MBeuO.DKV0Md"
           }
         }
       },
       {
-        "name": "click title",
+        "name": "get title",
         "method": "get",
         "event": {
           "selector": {
-            "type": "xpath",
-            "value": "//*[@id=\"New2HomeTrendPage-react-component-a1d076aa-7516-4189-94a2-b72fa928e063\"]/div/main/div[2]/article[1]/h2/a"
+            "type": "css",
+            "value": "a.style-14xjz8f"
           },
           "bind_key": "first_title"
         }
