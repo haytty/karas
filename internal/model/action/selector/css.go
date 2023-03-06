@@ -6,15 +6,15 @@ import (
 	"github.com/tebeka/selenium"
 )
 
-type XPath string
+type CSS string
 
-func (t *XPath) TypeName() string {
-	return selenium.ByXPATH
+func (t *CSS) TypeName() string {
+	return selenium.ByCSSSelector
 }
 
-type XPathValue string
+type CSSValue string
 
-func (t *XPathValue) Value() string {
+func (t *CSSValue) Value() string {
 	v := string(*t)
 	trimedSuffix := strings.TrimSuffix(v, "\n")
 	return strings.TrimSpace(trimedSuffix)

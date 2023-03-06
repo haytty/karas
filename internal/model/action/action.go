@@ -42,6 +42,12 @@ func (a *Action) UnmarshalJSON(bytes []byte) error {
 			return err
 		}
 		a.Event = event
+	case "submit":
+		event := new(event.SubmitEvent)
+		if err := json.Unmarshal(preUnMarshalAction.Event, event); err != nil {
+			return err
+		}
+		a.Event = event
 	}
 
 	a.Name = preUnMarshalAction.Name

@@ -8,19 +8,19 @@ import (
 	"github.com/tebeka/selenium"
 )
 
-type ClickEvent struct {
+type SubmitEvent struct {
 	Selector selector.Selector `json:"selector"`
 	Value    value.Value       `json:"value"`
 }
 
-func (i ClickEvent) Act(wd selenium.WebDriver) error {
+func (i SubmitEvent) Act(wd selenium.WebDriver) error {
 	btn, err := wd.FindElement(i.Selector.Type.TypeName(), i.Selector.Value.Value())
 	if err != nil {
-		return fmt.Errorf("click event: find element error: %v", err)
+		return fmt.Errorf("submit event: find element error: %v", err)
 	}
 
-	if err := btn.Click(); err != nil {
-		return fmt.Errorf("click event: button click error: %v", err)
+	if err := btn.Submit(); err != nil {
+		return fmt.Errorf("submit event: button submit error: %v", err)
 	}
 
 	return nil

@@ -27,8 +27,14 @@ func (s *Selector) UnmarshalJSON(bytes []byte) error {
 
 		s.Type = &t
 		s.Value = &v
-	}
+	case "css":
+		t, v :=
+			CSS(preUnMarshalSelector.Type),
+			CSSValue(preUnMarshalSelector.Value)
 
+		s.Type = &t
+		s.Value = &v
+	}
 	return nil
 }
 

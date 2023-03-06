@@ -1,58 +1,48 @@
 {
-  "karas": {
+  "suite": {
     "url": "https://google.com",
     "output": "json",
     "actions": [
       {
-        "name": "input id",
+        "name": "input qiita",
         "method": "input",
         "event": {
           "selector": {
             "type": "xpath",
-            "value": "fuoo"
+            "value": "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input"
           },
-          "value": "fugafuga"
+          "value": "qiita"
         }
       },
       {
-        "name": "input pw",
-        "method": "input",
+        "name": "click search",
+        "method": "click",
         "event": {
           "selector": {
-            "type": "xpath",
-            "value": "fuoo"
-          },
-          "value": "hogehoge"
+            "type": "css",
+            "value": "input.gNO89b"
+          }
         }
       },
       {
-        "name": "click login",
+        "name": "click href",
         "method": "click",
         "event": {
           "selector": {
             "type": "xpath",
-            "value": "fuoo"
+            "value": "//*[@id=\"rso\"]/div[1]/div/div/div/div/div/div/div/div[1]/a"
           }
         }
       },
       {
-        "name": "get value1",
+        "name": "click title",
         "method": "get",
         "event": {
           "selector": {
             "type": "xpath",
-            "value": "fuoo"
-          }
-        }
-      },
-      {
-        "name": "get value2",
-        "method": "get",
-        "event": {
-          "selector": {
-            "type": "xpath",
-            "value": "fuoo"
-          }
+            "value": "//*[@id=\"New2HomeTrendPage-react-component-a1d076aa-7516-4189-94a2-b72fa928e063\"]/div/main/div[2]/article[1]/h2/a"
+          },
+          "bind_key": "first_title"
         }
       }
     ]

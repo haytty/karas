@@ -4,7 +4,13 @@ import "github.com/haytty/karas/internal/util"
 
 type GlobalOption struct {
 	Config string
-	Json   string
+	JSON   string
+
+	ChromeDriver string
+	Chrome       string
+
+	SeleniumPath string
+	Port         int
 }
 
 func (g *GlobalOption) Valid() bool {
@@ -12,7 +18,7 @@ func (g *GlobalOption) Valid() bool {
 }
 
 func (g *GlobalOption) validConfig() bool {
-	return util.IsFileExist(g.Config) || (g.Json != "" && util.IsFileExist(g.Json))
+	return util.IsFileExist(g.Config) || (g.JSON != "" && util.IsFileExist(g.JSON))
 }
 
 var globalOption *GlobalOption

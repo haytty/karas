@@ -1,5 +1,7 @@
 package event
 
+import "github.com/tebeka/selenium"
+
 type Event interface {
-	Act() error
+	Act(selenium.WebDriver) error
 }

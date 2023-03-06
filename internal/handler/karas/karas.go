@@ -1,24 +1,25 @@
 package karas
 
 import (
-	"encoding/json"
-	"os"
+	"github.com/haytty/karas/cli/flags"
+	"github.com/haytty/karas/internal/store"
+	"github.com/haytty/karas/internal/webdriver"
 
 	"github.com/haytty/karas/internal/model"
 )
 
-func Apply(jsonFile string) error {
-	b, err := os.ReadFile(jsonFile)
-	if err != nil {
+func Apply(option *flags.GlobalOption) error {
+	w := webdriver.NewSelenium(option.SeleniumPath, option.Chrome, option.ChromeDriver, option.Port)
+	m := model.NewKaras(option.Config, option.JSON, w)
+	s := store.NewStore()
+
+	if err := m.Load(); err != nil {
 		return err
 	}
 
-	m := model.NewKarasJSON()
-	if err := json.Unmarshal(b, m); err != nil {
+	if err := m.Do(); err != nil {
 		return err
 	}
-
-	m.Do()
-
+	s.Dump("")
 	return nil
 }

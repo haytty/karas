@@ -21,4 +21,7 @@ lint:
 	golangci-lint run
 
 json_test:
-	go run ./cmd/karas/karas.go --json ./misc/data/karas.json
+	go run ./cmd/karas/karas.go --json ./misc/data/karas.json \
+		--chrome "./drivers/chrome-linux/chrome" \
+		--chrome-driver "./drivers/chromedriver" \
+		--selenium "./drivers/selenium-server.jar"
