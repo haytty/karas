@@ -1,0 +1,6 @@
+URL "https://google.com"
+INPUT VALUE qiita SELECTOR css "input.gLFyf" EVENT_NAME "input qiita"
+WAIT VALUE 10 EVENT_NAME "wait 10 seconds"
+CLICK SELECTOR css "input.gNO89b" EVENT_NAME "click search button"
+CLICK SELECTOR css "h3.LC20lb.MBeuO.DKV0Md" EVENT_NAME "click displayed first element"
+GET BIND_KEY first_title SELECTOR css "input.gLFyf" EVENT_NAME "get first article title"
