@@ -63,7 +63,6 @@ func (k *Karas) Do() error {
 		if err := action.Event.Act(wd); err != nil {
 			return err
 		}
-		time.Sleep(10 * time.Second)
 	}
 	return nil
 }
