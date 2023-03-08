@@ -1,6 +1,11 @@
 package page
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+
+	"github.com/fatih/color"
+)
 
 type Page struct {
 	URL string
@@ -13,6 +18,14 @@ func NewPage() *Page {
 	return &Page{
 		DOM: dom,
 	}
+}
+
+func (p *Page) String() string {
+	return fmt.Sprintf(
+		color.GreenString("URL: %s, %v"),
+		p.URL,
+		p.DOM,
+	)
 }
 
 func (p *Page) Set(key, value string) {

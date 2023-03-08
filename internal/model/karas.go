@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/haytty/karas/internal/model/action"
+	"github.com/tebeka/selenium"
 
 	"github.com/haytty/karas/internal/webdriver"
 )
@@ -56,7 +56,18 @@ func (k *Karas) Do() error {
 	if err := wd.Get(k.Suite.Url); err != nil {
 		return err
 	}
-	time.Sleep(10 * time.Second)
+
+	// wait starting browser.
+	err = wd.Wait(func(wd selenium.WebDriver) (bool, error) {
+		_, err := wd.CurrentURL()
+		if err != nil {
+			return false, nil
+		}
+		return true, nil
+	})
+	if err != nil {
+		return fmt.Errorf("browser open error: %v", err)
+	}
 
 	for _, action := range k.Suite.Actions {
 		fmt.Printf("Execute Action: %s\n", action.Name)

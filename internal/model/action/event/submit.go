@@ -40,7 +40,7 @@ func (e SubmitEvent) collectPageInfo(wd selenium.WebDriver) (*page.Page, seleniu
 	p := page.NewPage()
 	p.URL = url
 
-	elem, err := wd.FindElement(e.Selector.Type.TypeName(), e.Selector.Value.Value())
+	elem, err := findElement(wd, e.Selector.Type.TypeName(), e.Selector.Value.Value())
 	if err != nil {
 		return nil, nil, fmt.Errorf("submit event: find element error: %v", err)
 	}
@@ -52,11 +52,13 @@ func (e SubmitEvent) check(beforePage *page.Page) selenium.Condition {
 	return func(wd selenium.WebDriver) (bool, error) {
 		afterPage, _, err := e.collectPageInfo(wd)
 		if err != nil {
+			// Returns nil because polling is not performed when error contents are returned
 			return false, err
 		}
 
 		if !afterPage.Match(beforePage) {
-			return false, fmt.Errorf("submit event: find element error: %v", err)
+			// Returns nil because polling is not performed when error contents are returned
+			return false, nil
 		}
 
 		return true, nil

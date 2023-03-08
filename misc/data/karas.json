@@ -21,14 +21,6 @@
           "selector": {
             "type": "css",
             "value": "input.gNO89b"
-          },
-          "check": {
-            "condition": "equal",
-            "value": "hoge",
-            "url": {
-              "type": "css",
-              "value": "input.gNO89b"
-            },
           }
         }
       },

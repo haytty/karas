@@ -16,7 +16,7 @@ type GetEvent struct {
 }
 
 func (i GetEvent) Act(wd selenium.WebDriver) error {
-	elem, err := wd.FindElement(i.Selector.Type.TypeName(), i.Selector.Value.Value())
+	elem, err := findElement(wd, i.Selector.Type.TypeName(), i.Selector.Value.Value())
 	if err != nil {
 		return fmt.Errorf("get event: find element error: %v", err)
 	}

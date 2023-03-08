@@ -16,7 +16,7 @@ type ClickEvent struct {
 }
 
 func (e ClickEvent) Act(wd selenium.WebDriver) error {
-	beforePage, btn, err := e.collectPageInfo(wd)
+	beforePage, btn, err := e.collectPageInfo(wd, false)
 	if err != nil {
 		return err
 	}
@@ -32,17 +32,23 @@ func (e ClickEvent) Act(wd selenium.WebDriver) error {
 	return nil
 }
 
-func (e ClickEvent) collectPageInfo(wd selenium.WebDriver) (*page.Page, selenium.WebElement, error) {
+func (e ClickEvent) collectPageInfo(wd selenium.WebDriver, isPageTransition bool) (*page.Page, selenium.WebElement, error) {
+	var elem selenium.WebElement
+	var err error
+
 	url, err := wd.CurrentURL()
 	if err != nil {
 		return nil, nil, fmt.Errorf("click event: retrieve url error: %v", err)
 	}
+
 	p := page.NewPage()
 	p.URL = url
 
-	elem, err := wd.FindElement(e.Selector.Type.TypeName(), e.Selector.Value.Value())
-	if err != nil {
-		return nil, nil, fmt.Errorf("click event: find element error: %v", err)
+	if !isPageTransition {
+		elem, err = findElement(wd, e.Selector.Type.TypeName(), e.Selector.Value.Value())
+		if err != nil {
+			return nil, nil, fmt.Errorf("click event: find element error: %v", err)
+		}
 	}
 
 	return p, elem, nil
@@ -50,15 +56,15 @@ func (e ClickEvent) collectPageInfo(wd selenium.WebDriver) (*page.Page, selenium
 
 func (e ClickEvent) check(beforePage *page.Page) selenium.Condition {
 	return func(wd selenium.WebDriver) (bool, error) {
-		afterPage, _, err := e.collectPageInfo(wd)
+		afterPage, _, err := e.collectPageInfo(wd, true)
 		if err != nil {
-			return false, err
+			fmt.Printf("%v\n", err)
+			// Returns nil because polling is not performed when error contents are returned
+			return false, nil
 		}
 
-		if !afterPage.Match(beforePage) {
-			return false, fmt.Errorf("click event: find element error: %v", err)
-		}
-
-		return true, nil
+		fmt.Println("changed:", !afterPage.Match(beforePage))
+		// Returns nil because polling is not performed when error contents are returned
+		return !afterPage.Match(beforePage), nil
 	}
 }
