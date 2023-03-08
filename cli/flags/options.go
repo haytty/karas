@@ -6,6 +6,8 @@ type GlobalOption struct {
 	Config string
 	JSON   string
 
+	Format string
+
 	ChromeDriver string
 	Chrome       string
 

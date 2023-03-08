@@ -20,6 +20,6 @@ func Apply(option *flags.GlobalOption) error {
 	if err := m.Do(); err != nil {
 		return err
 	}
-	s.Dump("")
+	s.Dump(option.Format)
 	return nil
 }

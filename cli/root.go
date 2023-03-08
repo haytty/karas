@@ -47,6 +47,9 @@ func NewKarasCommand(cli cli.Cli) *cobra.Command {
 	jsonFlagName := "json"
 	rootCmd.PersistentFlags().StringVarP(&opts.JSON, jsonFlagName, "j", "", "json file path")
 
+	formatFlagName := "format"
+	rootCmd.PersistentFlags().StringVarP(&opts.Format, formatFlagName, "f", "json", "output format: default json")
+
 	portFlagName := "port"
 	rootCmd.PersistentFlags().IntVarP(&opts.Port, portFlagName, "p", 8080, "selenium localize port.")
 
