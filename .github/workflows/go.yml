@@ -14,21 +14,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
-    - uses: action/checkout@v3
-      with:
-        repository: haytty/karas
-        token: ${{ secrets.MY_GITHUB_ACTION_TOKEN }}
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
     - name: Set up Go
-      uses: action/setup-go@v3
+      uses: actions/setup-go@v3
       with:
         go-version: 1.19
-        token: ${{ secrets.MY_GITHUB_ACTION_TOKEN }}
 
     - name: Build
       run: make build
