@@ -43,7 +43,7 @@
             "type": "xpath",
             "value": "fuoo"
           },
-          "bind_key": "fuga"
+          "bindKey": "fuga"
         }
       },
       {
@@ -54,7 +54,7 @@
             "type": "xpath",
             "value": "fuoo"
           },
-          "bind_key": "hoge"
+          "bindKey": "hoge"
         }
       }
     ]

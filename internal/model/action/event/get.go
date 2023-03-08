@@ -12,7 +12,7 @@ import (
 
 type GetEvent struct {
 	Selector selector.Selector `json:"selector"`
-	BindKey  value.Value       `json:"bind_key"`
+	BindKey  value.Value       `json:"bindKey"`
 }
 
 func (i GetEvent) Act(wd selenium.WebDriver) error {
