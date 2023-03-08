@@ -8,6 +8,11 @@ jobs:
   test:
     name: Test with Coverage
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
     - name: Check out code
       uses: action/checkout@v3
