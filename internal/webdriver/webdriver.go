@@ -36,11 +36,12 @@ func (s *Selenium) NewWebDriver() (*selenium.Service, selenium.WebDriver, error)
 			// This flag is needed to test against Chrome binaries that are not the
 			// default installation. The sandbox requires a setuid binary.
 			"--no-sandbox",
+			"--disable-dev-shm-usage",
+			"--headless",
 		},
 		W3C: true,
 	}
 
-	chrCaps.Args = append(chrCaps.Args, "--headless")
 	caps.AddChrome(chrCaps)
 	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", s.port))
 	return service, wd, err

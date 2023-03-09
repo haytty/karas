@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/haytty/karas/internal/model/action"
 	"github.com/tebeka/selenium"
@@ -44,6 +45,10 @@ func (k *Karas) Load() error {
 	return nil
 }
 
+const (
+	defaultImplicitWaitTime = 5 * time.Second
+)
+
 func (k *Karas) Do() error {
 	service, wd, err := k.webdriver.NewWebDriver()
 	if err != nil {
@@ -51,6 +56,10 @@ func (k *Karas) Do() error {
 	}
 	defer service.Stop()
 	defer wd.Quit()
+
+	if err := wd.SetImplicitWaitTimeout(defaultImplicitWaitTime); err != nil {
+		return err
+	}
 
 	// Navigate to the simple playground interface.
 	if err := wd.Get(k.Suite.Url); err != nil {

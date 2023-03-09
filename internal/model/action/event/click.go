@@ -63,7 +63,8 @@ func (e ClickEvent) check(beforePage *page.Page) selenium.Condition {
 			return false, nil
 		}
 
-		fmt.Println("changed:", !afterPage.Match(beforePage))
+		//fmt.Println("changed:", !afterPage.Match(beforePage))
+
 		// Returns nil because polling is not performed when error contents are returned
 		return !afterPage.Match(beforePage), nil
 	}
