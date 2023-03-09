@@ -46,8 +46,10 @@ func findElementWithRefresh(wd selenium.WebDriver, selectorType, selectorValue s
 				return elem, err
 			}
 
+			// DEBUG
 			fmt.Println(src)
 
+			// has no effect
 			if err := wd.Refresh(); err != nil {
 				return elem, err
 			}
