@@ -25,3 +25,8 @@ combined_test:
 		--chrome "./drivers/chrome-linux/chrome" \
 		--chrome-driver "./drivers/chromedriver" \
 		--selenium "./drivers/selenium-server.jar"
+combined_test_for_config:
+	go run ./cmd/karas/karas.go --config ./misc/data/Karasfile \
+		--chrome "./drivers/chrome-linux/chrome" \
+		--chrome-driver "./drivers/chromedriver" \
+		--selenium "./drivers/selenium-server.jar"

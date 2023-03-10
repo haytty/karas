@@ -6,13 +6,11 @@ import (
 	"github.com/haytty/karas/internal/model/action/page"
 
 	"github.com/haytty/karas/internal/model/action/selector"
-	"github.com/haytty/karas/internal/model/action/value"
 	"github.com/tebeka/selenium"
 )
 
 type ClickEvent struct {
 	Selector selector.Selector `json:"selector"`
-	Value    value.Value       `json:"value"`
 }
 
 func (e ClickEvent) Act(wd selenium.WebDriver) error {

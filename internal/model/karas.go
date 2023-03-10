@@ -1,9 +1,7 @@
 package model
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/haytty/karas/internal/model/action"
@@ -14,35 +12,20 @@ import (
 
 type Karas struct {
 	Suite     KarasSuite `json:"suite"`
-	config    string
-	json      string
 	webdriver webdriver.WebDriver
 }
 
 type KarasSuite struct {
-	Url     string          `json:"url"`
+	URL string `json:"url"`
+	//ImplicitWaitTime time.Duration   `json:"implicitWaitTime"`
 	Output  string          `json:"output"`
 	Actions []action.Action `json:"actions"`
 }
 
-func NewKaras(config string, json string, driver webdriver.WebDriver) *Karas {
+func NewKaras(driver webdriver.WebDriver) *Karas {
 	return &Karas{
-		config:    config,
-		json:      json,
 		webdriver: driver,
 	}
-}
-
-func (k *Karas) Load() error {
-	b, err := os.ReadFile(k.json)
-	if err != nil {
-		return err
-	}
-
-	if err := json.Unmarshal(b, k); err != nil {
-		return err
-	}
-	return nil
 }
 
 const (
@@ -62,7 +45,7 @@ func (k *Karas) Do() error {
 	}
 
 	// Navigate to the simple playground interface.
-	if err := wd.Get(k.Suite.Url); err != nil {
+	if err := wd.Get(k.Suite.URL); err != nil {
 		return err
 	}
 
