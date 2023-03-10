@@ -1,0 +1,49 @@
+{
+  "suite": {
+    "url": "https://google.com",
+    "actions": [
+      {
+        "name": "input qiita",
+        "method": "input",
+        "event": {
+          "selector": {
+            "type": "css",
+            "value": "input.gLFyf"
+          },
+          "value": "qiita"
+        }
+      },
+      {
+        "name": "click search button",
+        "method": "click",
+        "event": {
+          "selector": {
+            "type": "css",
+            "value": "input.gNO89b"
+          }
+        }
+      },
+      {
+        "name": "click displayed first element",
+        "method": "click",
+        "event": {
+          "selector": {
+            "type": "css",
+            "value": "h3.LC20lb.MBeuO.DKV0Md"
+          }
+        }
+      },
+      {
+        "name": "get first article title",
+        "method": "get",
+        "event": {
+          "selector": {
+            "type": "css",
+            "value": "a.style-4xqyxv"
+          },
+          "bindKey": "first_title"
+        }
+      }
+    ]
+  }
+}
